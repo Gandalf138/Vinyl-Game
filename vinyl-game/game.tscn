@@ -20,5 +20,10 @@ offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
 
-[node name="RecordButton" type="Button" parent="CenterContainer" unique_id=1395551757]
+[node name="CounterContainer" type="HBoxContainer" parent="CenterContainer" unique_id=1805023590]
 layout_mode = 2
+
+[node name="RecordStackButton" type="Button" parent="CenterContainer/CounterContainer" unique_id=1395551757]
+layout_mode = 2
+
+[connection signal="pressed" from="CenterContainer/CounterContainer/RecordStackButton" to="." method="_on_record_button_pressed"]
