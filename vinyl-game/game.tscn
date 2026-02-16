@@ -4,13 +4,14 @@
 
 [node name="Game" type="Control" unique_id=643021661]
 layout_mode = 3
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_80nbo")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1559824324]
+[node name="LeftCenterContainer" type="CenterContainer" parent="." unique_id=1559824324]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -20,10 +21,101 @@ offset_right = 40.0
 offset_bottom = 20.0
 grow_vertical = 2
 
-[node name="CounterContainer" type="HBoxContainer" parent="CenterContainer" unique_id=1805023590]
+[node name="LeftCounterContainer" type="HBoxContainer" parent="LeftCenterContainer" unique_id=1805023590]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="RecordStackButton" type="Button" parent="LeftCenterContainer/LeftCounterContainer" unique_id=1395551757]
 layout_mode = 2
 
-[node name="RecordStackButton" type="Button" parent="CenterContainer/CounterContainer" unique_id=1395551757]
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=913357614]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = -20.0
+offset_right = 25.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RecordContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1260228801]
 layout_mode = 2
 
-[connection signal="pressed" from="CenterContainer/CounterContainer/RecordStackButton" to="." method="_on_record_button_pressed"]
+[node name="CenterBottomContainer" type="CenterContainer" parent="." unique_id=1294144589]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -0.5
+offset_top = -230.0
+offset_right = 0.5
+offset_bottom = -180.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CenterCounterContainer" type="VBoxContainer" parent="CenterBottomContainer" unique_id=1627205878]
+layout_mode = 2
+
+[node name="RunoutLabel" type="Label" parent="CenterBottomContainer/CenterCounterContainer" unique_id=1792175864]
+layout_mode = 2
+
+[node name="QualityLabel" type="Label" parent="CenterBottomContainer/CenterCounterContainer" unique_id=290710372]
+layout_mode = 2
+
+[node name="RightCenterContainer" type="CenterContainer" parent="." unique_id=638184061]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -29.0
+offset_right = -2.0
+offset_bottom = 29.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="RightCounterContainer" type="VBoxContainer" parent="RightCenterContainer" unique_id=1415449532]
+layout_mode = 2
+
+[node name="SearchLabel" type="Label" parent="RightCenterContainer/RightCounterContainer" unique_id=1301090512]
+layout_mode = 2
+
+[node name="SearchBar" type="LineEdit" parent="RightCenterContainer/RightCounterContainer" unique_id=1808678168]
+layout_mode = 2
+
+[node name="RightBottomContainer" type="CenterContainer" parent="." unique_id=594040722]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -305.0
+offset_right = -130.0
+offset_bottom = -228.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ValuesContainer" type="VBoxContainer" parent="RightBottomContainer" unique_id=2080895995]
+layout_mode = 2
+
+[node name="NMValueLabel" type="Label" parent="RightBottomContainer/ValuesContainer" unique_id=2008379596]
+layout_mode = 2
+
+[node name="VGValueLabel" type="Label" parent="RightBottomContainer/ValuesContainer" unique_id=1276308345]
+layout_mode = 2
+
+[node name="FValueLabel" type="Label" parent="RightBottomContainer/ValuesContainer" unique_id=454926412]
+layout_mode = 2
+
+[connection signal="pressed" from="LeftCenterContainer/LeftCounterContainer/RecordStackButton" to="." method="_on_record_stack_button_pressed"]
+[connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
