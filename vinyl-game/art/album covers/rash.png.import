@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0hj1awswjbag"
-path="res://.godot/imported/vinyls.png-b4f82b79a29c27218cb26063d2be1c7c.ctex"
+uid="uid://dxhcc668jynlw"
+path="res://.godot/imported/rash.png-2d3065d570567103aaab63d868dd3e1a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/vinyls.png"
-dest_files=["res://.godot/imported/vinyls.png-b4f82b79a29c27218cb26063d2be1c7c.ctex"]
+source_file="res://art/album covers/rash.png"
+dest_files=["res://.godot/imported/rash.png-2d3065d570567103aaab63d868dd3e1a.ctex"]
 
 [params]
 

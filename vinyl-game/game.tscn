@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://7lnuks3qfvf8"]
 
 [ext_resource type="Script" uid="uid://ygkxnk2dgu1y" path="res://game.gd" id="1_80nbo"]
-[ext_resource type="Texture2D" uid="uid://0hj1awswjbag" path="res://art/vinyls.png" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://0hj1awswjbag" path="res://art/Background.png" id="2_e2o6t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(320.5, 316.25)
@@ -30,23 +30,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_e2o6t")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=913357614]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -15.0
-offset_top = -20.0
-offset_right = 25.0
-offset_bottom = 20.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RecordContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1260228801]
-layout_mode = 2
-
 [node name="CenterBottomContainer" type="CenterContainer" parent="." unique_id=1294144589]
 layout_mode = 1
 anchors_preset = 7
@@ -54,10 +37,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -0.5
-offset_top = -230.0
-offset_right = 0.5
-offset_bottom = -180.0
+offset_left = 194.0
+offset_top = -432.0
+offset_right = 306.5
+offset_bottom = -382.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -77,8 +60,8 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -70.0
-offset_top = -29.0
+offset_left = -477.0
+offset_top = -259.0
 offset_right = -2.0
 offset_bottom = 29.0
 grow_horizontal = 0
@@ -100,10 +83,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -170.0
-offset_top = -305.0
-offset_right = -130.0
-offset_bottom = -228.0
+offset_left = -399.0
+offset_top = -590.0
+offset_right = -49.0
+offset_bottom = -442.0
 grow_horizontal = 0
 grow_vertical = 0
 
@@ -146,3 +129,4 @@ shape = SubResource("CircleShape2D_e2o6t")
 [connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
 [connection signal="input_event" from="RecordStack" to="." method="_on_record_stack_input_event"]
 [connection signal="input_event" from="Record" to="." method="_on_record_input_event"]
+[connection signal="input_event" from="Vinyl" to="." method="_on_vinyl_input_event"]
