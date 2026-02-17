@@ -1,6 +1,16 @@
 [gd_scene format=3 uid="uid://7lnuks3qfvf8"]
 
 [ext_resource type="Script" uid="uid://ygkxnk2dgu1y" path="res://game.gd" id="1_80nbo"]
+[ext_resource type="Texture2D" uid="uid://0hj1awswjbag" path="res://art/vinyls.png" id="2_e2o6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
+size = Vector2(320.5, 316.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
+size = Vector2(300, 300)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e2o6t"]
+radius = 150.0
 
 [node name="Game" type="Control" unique_id=643021661]
 layout_mode = 3
@@ -9,24 +19,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("1_80nbo")
 
-[node name="LeftCenterContainer" type="CenterContainer" parent="." unique_id=1559824324]
-layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -20.0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2063803038]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=2088873007]
 offset_right = 40.0
-offset_bottom = 20.0
-grow_vertical = 2
-
-[node name="LeftCounterContainer" type="HBoxContainer" parent="LeftCenterContainer" unique_id=1805023590]
-layout_mode = 2
-theme_override_constants/separation = 4
-
-[node name="RecordStackButton" type="Button" parent="LeftCenterContainer/LeftCounterContainer" unique_id=1395551757]
-layout_mode = 2
+offset_bottom = 40.0
+texture = ExtResource("2_e2o6t")
 
 [node name="CenterContainer" type="CenterContainer" parent="." unique_id=913357614]
 layout_mode = 1
@@ -117,5 +119,30 @@ layout_mode = 2
 [node name="FValueLabel" type="Label" parent="RightBottomContainer/ValuesContainer" unique_id=454926412]
 layout_mode = 2
 
-[connection signal="pressed" from="LeftCenterContainer/LeftCounterContainer/RecordStackButton" to="." method="_on_record_stack_button_pressed"]
+[node name="RecordStack" type="Area2D" parent="." unique_id=1851714835]
+position = Vector2(210, 775)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RecordStack" unique_id=410351641]
+shape = SubResource("RectangleShape2D_e2o6t")
+
+[node name="Record" type="Area2D" parent="." unique_id=630962859]
+z_index = 2
+position = Vector2(750, 750)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Record" unique_id=282876567]
+shape = SubResource("RectangleShape2D_feb5d")
+
+[node name="Sprite2D" type="Sprite2D" parent="Record" unique_id=1147682656]
+
+[node name="Vinyl" type="Area2D" parent="." unique_id=1204424342]
+z_index = 1
+position = Vector2(900, 750)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vinyl" unique_id=1556611722]
+shape = SubResource("CircleShape2D_e2o6t")
+
+[node name="Sprite2D" type="Sprite2D" parent="Vinyl" unique_id=616719918]
+
 [connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
+[connection signal="input_event" from="RecordStack" to="." method="_on_record_stack_input_event"]
+[connection signal="input_event" from="Record" to="." method="_on_record_input_event"]
