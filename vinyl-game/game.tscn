@@ -116,6 +116,7 @@ position = Vector2(750, 750)
 shape = SubResource("RectangleShape2D_feb5d")
 
 [node name="Sprite2D" type="Sprite2D" parent="Record" unique_id=1147682656]
+scale = Vector2(0.333, 0.333)
 
 [node name="Vinyl" type="Area2D" parent="." unique_id=1204424342]
 z_index = 1
@@ -125,6 +126,7 @@ position = Vector2(900, 750)
 shape = SubResource("CircleShape2D_e2o6t")
 
 [node name="Sprite2D" type="Sprite2D" parent="Vinyl" unique_id=616719918]
+scale = Vector2(0.333, 0.333)
 
 [connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
 [connection signal="input_event" from="RecordStack" to="." method="_on_record_stack_input_event"]

@@ -1,0 +1,55 @@
+[gd_scene format=3 uid="uid://du4u8ltc00vgh"]
+
+[ext_resource type="Script" uid="uid://dq5a1jru0x5ly" path="res://RecordInspection.gd" id="1_ntoxg"]
+[ext_resource type="Texture2D" uid="uid://uod61hx02oas" path="res://art/Backgrounds/Record_Inspection.png" id="2_5p5pq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ntoxg"]
+size = Vector2(900, 900)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ntoxg"]
+radius = 450.0
+
+[node name="RecordInspection" type="Control" unique_id=1591773006]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ntoxg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=231455831]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1981130155]
+z_index = -1
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_5p5pq")
+
+[node name="BackButton" type="Button" parent="." unique_id=1686204046]
+z_index = 1
+layout_mode = 0
+offset_top = 1030.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="RecordSleeve" type="Area2D" parent="." unique_id=1413312947]
+z_index = 2
+position = Vector2(540, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RecordSleeve" unique_id=58824304]
+shape = SubResource("RectangleShape2D_ntoxg")
+
+[node name="Sprite2D" type="Sprite2D" parent="RecordSleeve" unique_id=1910110571]
+
+[node name="Vinyl" type="Area2D" parent="." unique_id=1414560987]
+z_index = 1
+position = Vector2(1000, 540)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Vinyl" unique_id=1857503520]
+shape = SubResource("CircleShape2D_ntoxg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Vinyl" unique_id=1173073807]
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="input_event" from="RecordSleeve" to="." method="_on_record_sleeve_input_event"]
+[connection signal="input_event" from="Vinyl" to="." method="_on_vinyl_input_event"]

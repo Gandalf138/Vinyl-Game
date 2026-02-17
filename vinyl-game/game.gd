@@ -19,7 +19,6 @@ var albums: Array[AlbumData] = []
 var quality = ['NM', 'VG', 'F']
 var runout = ''
 var record_pressed = true
-var record_present = false
 var album_cover_paths = []
 var nmvalue = 0
 var dragging_record := false
@@ -29,6 +28,10 @@ var drag_offset := 0.0
 func _ready() -> void:
 	load_albums()
 	create_searchbar()
+	if GameManager.record_present:
+		create_record(GameManager.current_record)
+	if GameManager.vinyl_present:
+		create_vinyl()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -54,13 +57,13 @@ func create_searchbar():
 	search_label.add_theme_color_override("font_color", Color.BLACK)
 	searchbar.add_theme_font_size_override("font_size", 30)
 	searchbar.custom_minimum_size = Vector2(200, 50)
-
 			
-func create_record():
-	var album = albums.pick_random()
+func create_record(album):
+	GameManager.current_record = album
 	album_cover.texture = album.cover_texture
-	runout = album.runout
-	nmvalue = album.nm_value
+	
+func create_vinyl():
+	vinyl_sprite.texture = load("res://art/vinyl.png")
 	
 func _input(event):
 	if event is InputEventMouseButton:
@@ -75,39 +78,15 @@ func _on_record_stack_input_event(viewport: Node, event: InputEvent, shape_idx: 
 			runout = ''
 			vinyl_sprite.texture = null
 			record_pressed = false
-			record_present = true
-			create_record()
-
+			GameManager.record_present = true
+			albums.pick_random()
+			create_record(albums.pick_random())
+			
 func _on_record_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if record_present == true:
-				#get_tree().change_scene_to_file("res://record_inspection.tscn")
-				if record_pressed == false:
-					vinyl_sprite.texture = load("res://art/vinyl.png")
-					quality_label.text = "Quality: " + quality.pick_random()
-					quality_label.add_theme_font_size_override("font_size", 36)
-					runout_label.text = 'Runout Text: ' + runout
-					runout_label.add_theme_font_size_override("font_size", 36)
-				
-				record_pressed = true
-				
-func _on_vinyl_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:
-			if event.pressed:
-				var mouse_pos = get_global_mouse_position()
-				var center_x = vinyl.global_position.x
-
-				var clicked_right_side = mouse_pos.x > center_x
-
-				if clicked_right_side:
-					dragging_record = true
-					
-					var center = vinyl.global_position
-					
-					var click_angle = center.angle_to_point(mouse_pos)
-					drag_offset = vinyl.rotation - click_angle
+			if GameManager.record_present == true:
+				get_tree().change_scene_to_file("res://RecordInspection.tscn")
 
 func _on_search_bar_text_submitted(new_text: String) -> void:
 	var vgvalue = int(floor(nmvalue * .7))
@@ -127,3 +106,20 @@ func _on_search_bar_text_submitted(new_text: String) -> void:
 		NMvalue_label.text = ''
 		VGvalue_label.text = ''
 		Fvalue_label.text = ''
+
+func _on_vinyl_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				var mouse_pos = get_global_mouse_position()
+				var center_x = vinyl.global_position.x
+
+				var clicked_right_side = mouse_pos.x > center_x
+
+				if clicked_right_side:
+					dragging_record = true
+					
+					var center = vinyl.global_position
+					
+					var click_angle = center.angle_to_point(mouse_pos)
+					drag_offset = vinyl.rotation - click_angle
