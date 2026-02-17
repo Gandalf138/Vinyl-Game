@@ -82,6 +82,7 @@ func _on_record_input_event(viewport: Node, event: InputEvent, shape_idx: int) -
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if record_present == true:
+				#get_tree().change_scene_to_file("res://record_inspection.tscn")
 				if record_pressed == false:
 					vinyl_sprite.texture = load("res://art/vinyl.png")
 					quality_label.text = "Quality: " + quality.pick_random()

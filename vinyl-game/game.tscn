@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://7lnuks3qfvf8"]
 
 [ext_resource type="Script" uid="uid://ygkxnk2dgu1y" path="res://game.gd" id="1_80nbo"]
-[ext_resource type="Texture2D" uid="uid://0hj1awswjbag" path="res://art/Background.png" id="2_e2o6t"]
+[ext_resource type="Texture2D" uid="uid://0hj1awswjbag" path="res://art/Backgrounds/Counter.png" id="2_e2o6t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
 size = Vector2(320.5, 316.25)
