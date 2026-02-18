@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://p83fulaejy16"]
+
+[ext_resource type="Texture2D" uid="uid://d17idy0f633qv" path="res://art/album covers/ye.png" id="1_r0mcb"]
+[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_qvhdp"]
+
+[resource]
+script = ExtResource("2_qvhdp")
+artist = "Kanye"
+album_name = "Yeesus"
+runout = "42069"
+nm_value = 250
+cover_texture = ExtResource("1_r0mcb")
+metadata/_custom_type_script = "uid://dkkj2wwiy56el"

@@ -51,13 +51,18 @@ shape = SubResource("CircleShape2D_ntoxg")
 
 [node name="Sprite2D" type="Sprite2D" parent="Disc" unique_id=1173073807]
 
-[node name="RunoutLabel" type="Label" parent="Disc" unique_id=591752219]
+[node name="RunoutPivot" type="Node2D" parent="Disc" unique_id=1548081478]
+
+[node name="RunoutLabel" type="Label" parent="Disc/RunoutPivot" unique_id=591752219]
 z_index = 2
-offset_left = 150.0
-offset_top = -22.0
-offset_right = 190.0
-offset_bottom = 1.0
-rotation = 1.5707964
+offset_right = 1.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sheen" type="Sprite2D" parent="." unique_id=1718360745]
+z_index = 4
+position = Vector2(1000, 540)
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="input_event" from="RecordSleeve" to="." method="_on_record_sleeve_input_event"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://c4ucjicsvptcm"]
+
+[ext_resource type="Texture2D" uid="uid://xb8xcjxedxrc" path="res://art/album covers/head.png" id="1_70sgs"]
+[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_cqavn"]
+
+[resource]
+script = ExtResource("2_cqavn")
+artist = "Herbie"
+album_name = "Head"
+runout = "WPGG0"
+nm_value = 50
+cover_texture = ExtResource("1_70sgs")
+metadata/_custom_type_script = "uid://dkkj2wwiy56el"

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://ccmkwlkko4q22"]
+
+[ext_resource type="Texture2D" uid="uid://dhsi720yys1re" path="res://art/album covers/arctic.png" id="1_mnjtd"]
+[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_1evlw"]
+
+[resource]
+script = ExtResource("2_1evlw")
+artist = "Arctic Mankey"
+album_name = "AM"
+runout = "DW342"
+nm_value = 25
+cover_texture = ExtResource("1_mnjtd")
+metadata/_custom_type_script = "uid://dkkj2wwiy56el"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwfjty0h2mrk1"
-path="res://.godot/imported/disc.png-14870bde8de125a640894931bca66196.ctex"
+uid="uid://d17idy0f633qv"
+path="res://.godot/imported/ye.png-5052d01b54b8ca5992f588d65d66242a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Assets/disc.png"
-dest_files=["res://.godot/imported/disc.png-14870bde8de125a640894931bca66196.ctex"]
+source_file="res://art/album covers/ye.png"
+dest_files=["res://.godot/imported/ye.png-5052d01b54b8ca5992f588d65d66242a.ctex"]
 
 [params]
 

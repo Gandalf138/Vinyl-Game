@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://de8pxrakcjny0"]
+
+[ext_resource type="Texture2D" uid="uid://c0pplvo3x1j7a" path="res://art/album covers/Gay_Square.png" id="1_yfseb"]
+[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_4g7c1"]
+
+[resource]
+script = ExtResource("2_4g7c1")
+artist = "Punk Flood"
+album_name = "Gay Square"
+runout = "DSOTM"
+nm_value = 200
+cover_texture = ExtResource("1_yfseb")
+metadata/_custom_type_script = "uid://dkkj2wwiy56el"

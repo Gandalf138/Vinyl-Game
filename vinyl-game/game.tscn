@@ -108,6 +108,11 @@ shape = SubResource("CircleShape2D_e2o6t")
 [node name="Sprite2D" type="Sprite2D" parent="Disc" unique_id=616719918]
 scale = Vector2(0.333, 0.333)
 
+[node name="Sheen" type="Sprite2D" parent="." unique_id=2078455194]
+z_index = 4
+position = Vector2(900, 750)
+scale = Vector2(0.333, 0.333)
+
 [connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
 [connection signal="input_event" from="RecordStack" to="." method="_on_record_stack_input_event"]
 [connection signal="input_event" from="Record" to="." method="_on_record_input_event"]

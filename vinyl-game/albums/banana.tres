@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://b1nysfje6r5hb"]
+
+[ext_resource type="Texture2D" uid="uid://r4fehxh00p4s" path="res://art/album covers/Velv_Und.png" id="1_y265d"]
+[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_2uqb3"]
+
+[resource]
+script = ExtResource("2_2uqb3")
+artist = "Velvet Underpants"
+album_name = "banana"
+runout = "78SQW"
+nm_value = 420
+cover_texture = ExtResource("1_y265d")
+metadata/_custom_type_script = "uid://dkkj2wwiy56el"

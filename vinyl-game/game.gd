@@ -11,12 +11,11 @@ extends Control
 @onready var top_record_sprite = $RecordStack/TopRecord
 @onready var record = $Record
 @onready var disc = $Disc
+@onready var sheen = $Sheen
 @onready var album_cover = $Record/Sprite2D
 @onready var disc_sprite = $Disc/Sprite2D
 
-var rng = RandomNumberGenerator.new()
 var albums: Array[AlbumData] = []
-var quality = ['NM', 'VG', 'F']
 var album_cover_paths = []
 var nmvalue = 0
 var dragging_record := false
@@ -72,7 +71,15 @@ func create_record_stack():
 	top_record_sprite.texture = GameManager.top_of_stack.cover_texture
 	
 func create_disc():
-	disc_sprite.texture = load("res://art/Assets/disc.png")
+	if GameManager.disc_rotation != null:
+		disc.rotation = GameManager.disc_rotation
+	if GameManager.current_record_quality == 'NM':
+		disc_sprite.texture = load("res://art/Assets/discs/disc.png")
+		sheen.texture = load("res://art/Assets/discs/sheen.png")
+	elif GameManager.current_record_quality == 'VG':
+		disc_sprite.texture = load("res://art/Assets/discs/disc.png")
+	elif GameManager.current_record_quality == 'F':
+		disc_sprite.texture = load("res://art/Assets/discs/dusty_disc.png")
 	
 func _input(event):
 	if event is InputEventMouseButton:
@@ -83,8 +90,12 @@ func _on_record_stack_input_event(_viewport: Node, event: InputEvent, _shape_idx
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			disc_sprite.texture = null
-			GameManager.disc_present = false
 			GameManager.record_present = true
+			GameManager.current_record_quality = null
+			if GameManager.disc_present == true:
+				disc.rotation = 0
+			GameManager.disc_present = false
+			sheen.texture = null
 			create_record(GameManager.top_of_stack)
 			get_top_record()
 			create_record_stack()
@@ -93,6 +104,7 @@ func _on_record_input_event(_viewport: Node, event: InputEvent, _shape_idx: int)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if GameManager.record_present == true:
+				GameManager.disc_rotation = disc.rotation
 				get_tree().change_scene_to_file("res://RecordInspection.tscn")
 
 func _on_search_bar_text_submitted(new_text: String) -> void:
