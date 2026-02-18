@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://ygkxnk2dgu1y" path="res://game.gd" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://0hj1awswjbag" path="res://art/Backgrounds/Counter.png" id="2_e2o6t"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_e2o6t"]
-size = Vector2(320.5, 316.25)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
 size = Vector2(300, 300)
 
@@ -82,8 +79,14 @@ layout_mode = 2
 [node name="RecordStack" type="Area2D" parent="." unique_id=1851714835]
 position = Vector2(210, 775)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RecordStack" unique_id=410351641]
-shape = SubResource("RectangleShape2D_e2o6t")
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RecordStack" unique_id=1458458581]
+polygon = PackedVector2Array(-162, -158, -163, 138, -143, 173, 156, 173, 156, -125, 137, -159)
+
+[node name="TopRecord" type="Sprite2D" parent="RecordStack" unique_id=1702368651]
+position = Vector2(-24, -22)
+scale = Vector2(0.333, 0.333)
+
+[node name="RecordStack" type="Sprite2D" parent="RecordStack" unique_id=1433075014]
 
 [node name="Record" type="Area2D" parent="." unique_id=630962859]
 z_index = 2

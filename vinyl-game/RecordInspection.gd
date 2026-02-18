@@ -36,7 +36,7 @@ func create_record():
 	nmvalue = album.nm_value
 
 func create_disc():
-	disc_sprite.texture = load("res://art/vinyl.png")
+	disc_sprite.texture = load("res://art/Assets/disc.png")
 	runout_label.text = album.runout
 	
 func _input(event):

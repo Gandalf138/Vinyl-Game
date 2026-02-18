@@ -40,6 +40,7 @@ position = Vector2(540, 540)
 shape = SubResource("RectangleShape2D_ntoxg")
 
 [node name="Sprite2D" type="Sprite2D" parent="RecordSleeve" unique_id=1910110571]
+z_index = 3
 
 [node name="Disc" type="Area2D" parent="." unique_id=1414560987]
 z_index = 1

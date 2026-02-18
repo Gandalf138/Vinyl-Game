@@ -7,6 +7,8 @@ extends Control
 @onready var VGvalue_label = $RightBottomContainer/ValuesContainer/VGValueLabel
 @onready var Fvalue_label = $RightBottomContainer/ValuesContainer/FValueLabel
 @onready var record_stack = $RecordStack
+@onready var record_stack_sprite = $RecordStack/RecordStack
+@onready var top_record_sprite = $RecordStack/TopRecord
 @onready var record = $Record
 @onready var disc = $Disc
 @onready var album_cover = $Record/Sprite2D
@@ -25,6 +27,10 @@ var drag_offset := 0.0
 func _ready() -> void:
 	load_albums()
 	create_searchbar()
+	if GameManager.record_present == null:
+		get_top_record()
+	create_record_stack()
+	
 	if GameManager.record_present:
 		create_record(GameManager.current_record)
 	if GameManager.disc_present:
@@ -59,8 +65,15 @@ func create_record(album):
 	GameManager.current_record = album
 	album_cover.texture = album.cover_texture
 	
+func get_top_record():
+	GameManager.top_of_stack = albums.pick_random()
+	
+func create_record_stack():
+	record_stack_sprite.texture = load("res://art/Assets/record_stack.png")
+	top_record_sprite.texture = GameManager.top_of_stack.cover_texture
+	
 func create_disc():
-	disc_sprite.texture = load("res://art/vinyl.png")
+	disc_sprite.texture = load("res://art/Assets/disc.png")
 	
 func _input(event):
 	if event is InputEventMouseButton:
@@ -73,8 +86,9 @@ func _on_record_stack_input_event(viewport: Node, event: InputEvent, shape_idx: 
 			disc_sprite.texture = null
 			GameManager.disc_present = false
 			GameManager.record_present = true
-			albums.pick_random()
-			create_record(albums.pick_random())
+			create_record(GameManager.top_of_stack)
+			get_top_record()
+			create_record_stack()
 			
 func _on_record_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
