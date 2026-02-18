@@ -30,29 +30,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("2_e2o6t")
 
-[node name="CenterBottomContainer" type="CenterContainer" parent="." unique_id=1294144589]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 194.0
-offset_top = -432.0
-offset_right = 306.5
-offset_bottom = -382.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="CenterCounterContainer" type="VBoxContainer" parent="CenterBottomContainer" unique_id=1627205878]
-layout_mode = 2
-
-[node name="RunoutLabel" type="Label" parent="CenterBottomContainer/CenterCounterContainer" unique_id=1792175864]
-layout_mode = 2
-
-[node name="QualityLabel" type="Label" parent="CenterBottomContainer/CenterCounterContainer" unique_id=290710372]
-layout_mode = 2
-
 [node name="RightCenterContainer" type="CenterContainer" parent="." unique_id=638184061]
 layout_mode = 1
 anchors_preset = 6
@@ -118,17 +95,17 @@ shape = SubResource("RectangleShape2D_feb5d")
 [node name="Sprite2D" type="Sprite2D" parent="Record" unique_id=1147682656]
 scale = Vector2(0.333, 0.333)
 
-[node name="Vinyl" type="Area2D" parent="." unique_id=1204424342]
+[node name="Disc" type="Area2D" parent="." unique_id=1204424342]
 z_index = 1
 position = Vector2(900, 750)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Vinyl" unique_id=1556611722]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Disc" unique_id=1556611722]
 shape = SubResource("CircleShape2D_e2o6t")
 
-[node name="Sprite2D" type="Sprite2D" parent="Vinyl" unique_id=616719918]
+[node name="Sprite2D" type="Sprite2D" parent="Disc" unique_id=616719918]
 scale = Vector2(0.333, 0.333)
 
 [connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
 [connection signal="input_event" from="RecordStack" to="." method="_on_record_stack_input_event"]
 [connection signal="input_event" from="Record" to="." method="_on_record_input_event"]
-[connection signal="input_event" from="Vinyl" to="." method="_on_vinyl_input_event"]
+[connection signal="input_event" from="Disc" to="." method="_on_vinyl_input_event"]

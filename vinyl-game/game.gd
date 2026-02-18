@@ -3,22 +3,19 @@ extends Control
 @onready var right_counter_container = $RightCenterContainer/RightCounterContainer
 @onready var searchbar = $RightCenterContainer/RightCounterContainer/SearchBar
 @onready var search_label = $RightCenterContainer/RightCounterContainer/SearchLabel
-@onready var runout_label = $CenterBottomContainer/CenterCounterContainer/RunoutLabel
-@onready var quality_label = $CenterBottomContainer/CenterCounterContainer/QualityLabel
 @onready var NMvalue_label = $RightBottomContainer/ValuesContainer/NMValueLabel
 @onready var VGvalue_label = $RightBottomContainer/ValuesContainer/VGValueLabel
 @onready var Fvalue_label = $RightBottomContainer/ValuesContainer/FValueLabel
 @onready var record_stack = $RecordStack
 @onready var record = $Record
-@onready var vinyl = $Vinyl
+@onready var disc = $Disc
 @onready var album_cover = $Record/Sprite2D
-@onready var vinyl_sprite = $Vinyl/Sprite2D
+@onready var disc_sprite = $Disc/Sprite2D
 
 var rng = RandomNumberGenerator.new()
 var albums: Array[AlbumData] = []
 var quality = ['NM', 'VG', 'F']
-var runout = ''
-var record_pressed = true
+var runout
 var album_cover_paths = []
 var nmvalue = 0
 var dragging_record := false
@@ -30,16 +27,16 @@ func _ready() -> void:
 	create_searchbar()
 	if GameManager.record_present:
 		create_record(GameManager.current_record)
-	if GameManager.vinyl_present:
-		create_vinyl()
+	if GameManager.disc_present:
+		create_disc()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if dragging_record:
-		var center = vinyl.global_position
+		var center = disc.global_position
 		var mouse_pos = get_global_mouse_position()
 		var angle = center.angle_to_point(mouse_pos)
-		vinyl.rotation = angle + drag_offset
+		disc.rotation = angle + drag_offset
 	
 func load_albums():
 	var dir = DirAccess.open("res://albums")
@@ -62,8 +59,8 @@ func create_record(album):
 	GameManager.current_record = album
 	album_cover.texture = album.cover_texture
 	
-func create_vinyl():
-	vinyl_sprite.texture = load("res://art/vinyl.png")
+func create_disc():
+	disc_sprite.texture = load("res://art/vinyl.png")
 	
 func _input(event):
 	if event is InputEventMouseButton:
@@ -73,11 +70,8 @@ func _input(event):
 func _on_record_stack_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			quality_label.text = ''
-			runout_label.text = ''
-			runout = ''
-			vinyl_sprite.texture = null
-			record_pressed = false
+			disc_sprite.texture = null
+			GameManager.disc_present = false
 			GameManager.record_present = true
 			albums.pick_random()
 			create_record(albums.pick_random())
@@ -112,14 +106,14 @@ func _on_vinyl_input_event(viewport: Node, event: InputEvent, shape_idx: int) ->
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				var mouse_pos = get_global_mouse_position()
-				var center_x = vinyl.global_position.x
+				var center_x = disc.global_position.x
 
 				var clicked_right_side = mouse_pos.x > center_x
 
 				if clicked_right_side:
 					dragging_record = true
 					
-					var center = vinyl.global_position
+					var center = disc.global_position
 					
 					var click_angle = center.angle_to_point(mouse_pos)
-					drag_offset = vinyl.rotation - click_angle
+					drag_offset = disc.rotation - click_angle
