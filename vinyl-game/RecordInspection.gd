@@ -44,15 +44,14 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			dragging_record = false
 
-func _on_record_sleeve_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_record_sleeve_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if GameManager.record_present == true:
 				GameManager.disc_present = true
 				create_disc()
-
 				
-func _on_vinyl_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_disc_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:

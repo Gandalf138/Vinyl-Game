@@ -17,7 +17,6 @@ extends Control
 var rng = RandomNumberGenerator.new()
 var albums: Array[AlbumData] = []
 var quality = ['NM', 'VG', 'F']
-var runout
 var album_cover_paths = []
 var nmvalue = 0
 var dragging_record := false
@@ -37,7 +36,7 @@ func _ready() -> void:
 		create_disc()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if dragging_record:
 		var center = disc.global_position
 		var mouse_pos = get_global_mouse_position()
@@ -80,7 +79,7 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			dragging_record = false
 			
-func _on_record_stack_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_record_stack_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			disc_sprite.texture = null
@@ -90,17 +89,18 @@ func _on_record_stack_input_event(viewport: Node, event: InputEvent, shape_idx: 
 			get_top_record()
 			create_record_stack()
 			
-func _on_record_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_record_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if GameManager.record_present == true:
 				get_tree().change_scene_to_file("res://RecordInspection.tscn")
 
 func _on_search_bar_text_submitted(new_text: String) -> void:
+	nmvalue = GameManager.current_record.nm_value
 	var vgvalue = int(floor(nmvalue * .7))
 	var fvalue = int(floor(nmvalue * .2))
 
-	if new_text == runout and runout != '':
+	if new_text == GameManager.current_record.runout and GameManager.record_present:
 		NMvalue_label.text = 'NM: $' + str(nmvalue)
 		NMvalue_label.add_theme_font_size_override("font_size", 24)
 		NMvalue_label.add_theme_color_override("font_color", Color.BLACK)
@@ -110,12 +110,12 @@ func _on_search_bar_text_submitted(new_text: String) -> void:
 		Fvalue_label.text = 'F: $' + str(fvalue)
 		Fvalue_label.add_theme_font_size_override("font_size", 24)
 		Fvalue_label.add_theme_color_override("font_color", Color.BLACK)
-	elif runout == '':
+	else:
 		NMvalue_label.text = ''
 		VGvalue_label.text = ''
 		Fvalue_label.text = ''
 
-func _on_vinyl_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_vinyl_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
