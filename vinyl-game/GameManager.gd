@@ -9,3 +9,8 @@ var disc_present
 var record_rotation
 var runout_angle
 var disc_rotation
+
+#Pricing Variables
+var sticker_exists
+var sticker_position
+var sticker_price

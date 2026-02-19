@@ -65,7 +65,10 @@ func create_record(album):
 	
 func get_top_record():
 	GameManager.top_of_stack = albums.pick_random()
-	
+	if GameManager.record_present:
+		if GameManager.top_of_stack == GameManager.current_record:
+			GameManager.top_of_stack = albums.pick_random()
+			
 func create_record_stack():
 	record_stack_sprite.texture = load("res://art/Assets/record_stack.png")
 	top_record_sprite.texture = GameManager.top_of_stack.cover_texture

@@ -7,12 +7,17 @@ extends Control
 @onready var runout_label = $Disc/RunoutPivot/RunoutLabel
 @onready var runout_pivot = $Disc/RunoutPivot
 @onready var sheen = $Sheen
+@onready var sticker = $Sticker
+@onready var sticker_sprite = $Sticker/Sprite2D
+@onready var price = $Sticker/Label
+@onready var pad_screen = $NumberPad/PadScreen
 
 var rng = RandomNumberGenerator.new()
 var album
 var runout
 var nmvalue
 var dragging_record := false
+var dragging_sticker:= false
 var drag_offset := 0.0
 var quality = ['NM', 'VG', 'F']
 
@@ -20,6 +25,10 @@ func _ready() -> void:
 	album = GameManager.current_record
 	if GameManager.disc_present:
 		create_disc()
+	if GameManager.sticker_exists:
+			sticker.position = GameManager.sticker_position
+			sticker_sprite.texture = load("res://art/Assets/sticker.png")
+			price.text = GameManager.sticker_price
 	create_back_button()
 	create_record()
 
@@ -29,6 +38,10 @@ func _process(_delta: float) -> void:
 		var mouse_pos = get_global_mouse_position()
 		var angle = center.angle_to_point(mouse_pos)
 		disc.rotation = angle + drag_offset
+	
+	if dragging_sticker:
+		var mouse_pos = get_global_mouse_position()
+		sticker.position = mouse_pos
 
 func create_back_button():
 	back_button.text = "Return to counter"
@@ -102,6 +115,94 @@ func _on_disc_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -
 					var click_angle = center.angle_to_point(mouse_pos)
 					drag_offset = disc.rotation - click_angle
 
+func _on_sticker_20_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			dragging_sticker = event.pressed
+
 func _on_back_button_pressed() -> void:
 	GameManager.disc_rotation = disc.rotation
+	GameManager.sticker_position = sticker.position
 	get_tree().change_scene_to_file("res://game.tscn")
+	
+#Printer Code
+func _on_pad_0_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('0')
+	
+func _on_pad_1_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('1')
+
+func _on_pad_2_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('2')
+				
+func _on_pad_3_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('3')
+				
+func _on_pad_4_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('4')
+				
+func _on_pad_5_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('5')
+				
+func _on_pad_6_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('6')
+				
+func _on_pad_7_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('7')
+				
+func _on_pad_8_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('8')
+				
+func _on_pad_9_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text += str('9')
+
+func _on_pad_clear_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				pad_screen.text = ''
+
+func _on_pad_print_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT:
+			if event.pressed:
+				create_sticker()
+				
+func create_sticker():
+	sticker.position.x = 1540
+	sticker.position.y = 150
+	sticker_sprite.texture = load("res://art/Assets/sticker.png")
+	price.text = pad_screen.text
+	pad_screen.text = ''
+	GameManager.sticker_price = price.text
+	GameManager.sticker_exists = true

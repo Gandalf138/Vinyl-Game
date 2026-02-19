@@ -100,7 +100,7 @@ scale = Vector2(0.333, 0.333)
 
 [node name="Disc" type="Area2D" parent="." unique_id=1204424342]
 z_index = 1
-position = Vector2(900, 750)
+position = Vector2(903, 750)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Disc" unique_id=1556611722]
 shape = SubResource("CircleShape2D_e2o6t")
