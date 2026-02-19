@@ -113,6 +113,14 @@ z_index = 4
 position = Vector2(900, 750)
 scale = Vector2(0.333, 0.333)
 
+[node name="BuyStackLabel" type="Label" parent="." unique_id=437772433]
+layout_mode = 0
+offset_left = 606.0
+offset_top = 531.0
+offset_right = 646.0
+offset_bottom = 581.0
+theme_override_font_sizes/font_size = 36
+
 [connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
 [connection signal="input_event" from="RecordStack" to="." method="_on_record_stack_input_event"]
 [connection signal="input_event" from="Record" to="." method="_on_record_input_event"]

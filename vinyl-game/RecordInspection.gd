@@ -19,7 +19,6 @@ var nmvalue
 var dragging_record := false
 var dragging_sticker:= false
 var drag_offset := 0.0
-var quality = ['NM', 'VG', 'F']
 
 func _ready() -> void:
 	album = GameManager.current_record
@@ -53,16 +52,15 @@ func create_record():
 	nmvalue = album.nm_value
 
 func create_disc():
-	if GameManager.disc_rotation != null:
-		disc.rotation = GameManager.disc_rotation
-	if GameManager.current_record_quality == null:
-		GameManager.current_record_quality = quality.pick_random()
-	if GameManager.current_record_quality == 'NM':
+	print(GameManager.current_record.quality)
+	if GameManager.current_record.disc_rotation != null:
+		disc.rotation = GameManager.current_record.disc_rotation
+	if GameManager.current_record.quality == 'NM':
 		disc_sprite.texture = load("res://art/Assets/discs/disc.png")
 		sheen.texture = load("res://art/Assets/discs/sheen.png")
-	elif GameManager.current_record_quality == 'VG':
+	elif GameManager.current_record.quality == 'VG':
 		disc_sprite.texture = load("res://art/Assets/discs/disc.png")
-	elif GameManager.current_record_quality == 'F':
+	elif GameManager.current_record.quality == 'F':
 		disc_sprite.texture = load("res://art/Assets/discs/dusty_disc.png")
 	create_runout()
 	GameManager.disc_present = true
@@ -77,9 +75,9 @@ func create_runout():
 	if GameManager.disc_present == false:
 		angle = rng.randf_range(0.0, TAU)
 	else:
-		angle = GameManager.runout_angle
+		angle = GameManager.current_record.runout_angle
 		
-	GameManager.runout_angle = angle
+	GameManager.current_record.runout_angle = angle
 	var x = cos(angle)*radius
 	var y = sin(angle)*radius
 	
@@ -121,7 +119,7 @@ func _on_sticker_20_input_event(_viewport: Node, event: InputEvent, _shape_idx: 
 			dragging_sticker = event.pressed
 
 func _on_back_button_pressed() -> void:
-	GameManager.disc_rotation = disc.rotation
+	GameManager.current_record.disc_rotation = disc.rotation
 	GameManager.sticker_position = sticker.position
 	get_tree().change_scene_to_file("res://game.tscn")
 	

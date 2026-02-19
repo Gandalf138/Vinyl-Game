@@ -1,16 +1,18 @@
 extends Node
 
 #Record Inspection Variables
-var top_of_stack
 var current_record
-var current_record_quality
+var top_of_stack
 var record_present
 var disc_present
-var record_rotation
-var runout_angle
-var disc_rotation
 
 #Pricing Variables
 var sticker_exists
 var sticker_position
 var sticker_price
+
+#Selling Variables
+var buy_stack: Array[AlbumData] = []
+
+#Inventory Variables
+var inventory: Array[AlbumData] = []

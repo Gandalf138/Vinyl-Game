@@ -14,12 +14,15 @@ extends Control
 @onready var sheen = $Sheen
 @onready var album_cover = $Record/Sprite2D
 @onready var disc_sprite = $Disc/Sprite2D
+@onready var buy_label = $BuyStackLabel
 
 var albums: Array[AlbumData] = []
 var album_cover_paths = []
 var nmvalue = 0
 var dragging_record := false
 var drag_offset := 0.0
+var quality = ['NM', 'VG', 'F']
+var buy_value = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -33,6 +36,9 @@ func _ready() -> void:
 		create_record(GameManager.current_record)
 	if GameManager.disc_present:
 		create_disc()
+	
+	if GameManager.buy_stack != null:
+		buy_label.text = 'Stack Value: ' + str(get_buy_stack_value())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -60,28 +66,38 @@ func create_searchbar():
 	searchbar.custom_minimum_size = Vector2(200, 50)
 			
 func create_record(album):
-	GameManager.current_record = album
+	if GameManager.record_present == false or GameManager.record_present == null:
+		GameManager.current_record = album.duplicate(true)
 	album_cover.texture = album.cover_texture
+	if GameManager.current_record.quality == null:
+		GameManager.current_record.quality = quality.pick_random()
+	GameManager.record_present = true
 	
 func get_top_record():
 	GameManager.top_of_stack = albums.pick_random()
 	if GameManager.record_present:
-		if GameManager.top_of_stack == GameManager.current_record:
+		if GameManager.top_of_stack.album_name == GameManager.current_record.album_name:
 			GameManager.top_of_stack = albums.pick_random()
+			
+func get_buy_stack_value() -> int:
+	var total = 0
+	for record in GameManager.buy_stack:
+		total += record.nm_value
+	return total
 			
 func create_record_stack():
 	record_stack_sprite.texture = load("res://art/Assets/record_stack.png")
 	top_record_sprite.texture = GameManager.top_of_stack.cover_texture
 	
 func create_disc():
-	if GameManager.disc_rotation != null:
-		disc.rotation = GameManager.disc_rotation
-	if GameManager.current_record_quality == 'NM':
+	if GameManager.current_record.disc_rotation != null:
+		disc.rotation = GameManager.current_record.disc_rotation
+	if GameManager.current_record.quality == 'NM':
 		disc_sprite.texture = load("res://art/Assets/discs/disc.png")
 		sheen.texture = load("res://art/Assets/discs/sheen.png")
-	elif GameManager.current_record_quality == 'VG':
+	elif GameManager.current_record.quality == 'VG':
 		disc_sprite.texture = load("res://art/Assets/discs/disc.png")
-	elif GameManager.current_record_quality == 'F':
+	elif GameManager.current_record.quality == 'F':
 		disc_sprite.texture = load("res://art/Assets/discs/dusty_disc.png")
 	
 func _input(event):
@@ -92,22 +108,24 @@ func _input(event):
 func _on_record_stack_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			if GameManager.record_present:
+				GameManager.buy_stack.append(GameManager.current_record)
 			disc_sprite.texture = null
-			GameManager.record_present = true
-			GameManager.current_record_quality = null
 			if GameManager.disc_present == true:
 				disc.rotation = 0
 			GameManager.disc_present = false
 			sheen.texture = null
+			GameManager.record_present = false
 			create_record(GameManager.top_of_stack)
 			get_top_record()
 			create_record_stack()
+			buy_label.text = 'Stack Value: ' + str(get_buy_stack_value())
 			
 func _on_record_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			if GameManager.record_present == true:
-				GameManager.disc_rotation = disc.rotation
+				GameManager.current_record.disc_rotation = disc.rotation
 				get_tree().change_scene_to_file("res://RecordInspection.tscn")
 
 func _on_search_bar_text_submitted(new_text: String) -> void:
