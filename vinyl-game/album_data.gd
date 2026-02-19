@@ -11,3 +11,5 @@ var quality
 var price
 var runout_angle
 var disc_rotation
+
+var stickers: Array = []

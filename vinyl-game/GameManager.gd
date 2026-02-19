@@ -10,6 +10,7 @@ var disc_present
 var sticker_exists
 var sticker_position
 var sticker_price
+var max_sticker_z: int = 0
 
 #Selling Variables
 var buy_stack: Array[AlbumData] = []

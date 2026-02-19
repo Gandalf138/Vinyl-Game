@@ -82,7 +82,8 @@ func get_top_record():
 func get_buy_stack_value() -> int:
 	var total = 0
 	for record in GameManager.buy_stack:
-		total += record.nm_value
+		if record.price != null:
+			total += record.price
 	return total
 			
 func create_record_stack():
