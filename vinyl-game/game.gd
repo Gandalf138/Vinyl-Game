@@ -35,7 +35,7 @@ func _ready() -> void:
 	if GameManager.disc_present:
 		create_disc()
 	create_value_label()
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if dragging_record:
@@ -60,7 +60,7 @@ func create_searchbar():
 	search_label.add_theme_color_override("font_color", Color.BLACK)
 	searchbar.add_theme_font_size_override("font_size", 30)
 	searchbar.custom_minimum_size = Vector2(200, 50)
-			
+	
 func create_record(album):
 	if GameManager.record_present == false or GameManager.record_present == null:
 		GameManager.current_record = album.duplicate(true)
