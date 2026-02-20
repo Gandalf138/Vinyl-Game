@@ -1,13 +1,12 @@
 [gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://37uc4fj0b6fj"]
 
-[ext_resource type="Texture2D" uid="uid://ccladp05ginr2" path="res://art/album covers/cough.png" id="1_l47dg"]
+[ext_resource type="Texture2D" uid="uid://0464f7nev0ow" path="res://art/album covers/cough.png" id="1_l47dg"]
 [ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_2jtsk"]
 
 [resource]
 script = ExtResource("2_2jtsk")
 artist = "Cough"
 album_name = "The Blue Cough"
-runout = "ZW208"
 nm_value = 75
 cover_texture = ExtResource("1_l47dg")
 metadata/_custom_type_script = "uid://dkkj2wwiy56el"

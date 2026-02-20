@@ -7,7 +7,6 @@
 script = ExtResource("2_qvhdp")
 artist = "Kanye"
 album_name = "Yeesus"
-runout = "42069"
 nm_value = 250
 cover_texture = ExtResource("1_r0mcb")
 metadata/_custom_type_script = "uid://dkkj2wwiy56el"

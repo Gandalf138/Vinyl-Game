@@ -1,13 +1,12 @@
 [gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://dn1t6tsowp1yh"]
 
-[ext_resource type="Texture2D" uid="uid://dxhcc668jynlw" path="res://art/album covers/rash.png" id="1_346t5"]
+[ext_resource type="Texture2D" uid="uid://cn32105g6oo2k" path="res://art/album covers/rash.png" id="1_346t5"]
 [ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_0oaro"]
 
 [resource]
 script = ExtResource("2_0oaro")
 artist = "Rash"
 album_name = "Rash"
-runout = "YYZ42"
 nm_value = 500
 cover_texture = ExtResource("1_346t5")
 metadata/_custom_type_script = "uid://dkkj2wwiy56el"

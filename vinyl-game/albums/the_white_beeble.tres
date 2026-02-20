@@ -1,13 +1,12 @@
 [gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://cfuhfrst1ulo3"]
 
-[ext_resource type="Texture2D" uid="uid://b2w03epl8d5ie" path="res://art/album covers/beeble.png" id="1_q3bsj"]
+[ext_resource type="Texture2D" uid="uid://dlnv40tc8ot1w" path="res://art/album covers/beeble.png" id="1_q3bsj"]
 [ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_e8hut"]
 
 [resource]
 script = ExtResource("2_e8hut")
 artist = "The Beebles"
 album_name = "The White Album"
-runout = "78WD5"
 nm_value = 150
 cover_texture = ExtResource("1_q3bsj")
 metadata/_custom_type_script = "uid://dkkj2wwiy56el"

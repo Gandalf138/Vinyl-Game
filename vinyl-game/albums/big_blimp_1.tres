@@ -1,13 +1,12 @@
 [gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://c8jhv8yal42tk"]
 
-[ext_resource type="Texture2D" uid="uid://bplp1rfidc5cg" path="res://art/album covers/blimp.png" id="1_mmw4a"]
+[ext_resource type="Texture2D" uid="uid://v06b83oykpdn" path="res://art/album covers/blimp.png" id="1_mmw4a"]
 [ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_ogjk2"]
 
 [resource]
 script = ExtResource("2_ogjk2")
 artist = "Big Blimp"
 album_name = "Big Blimp I"
-runout = "XV456"
 nm_value = 100
 cover_texture = ExtResource("1_mmw4a")
 metadata/_custom_type_script = "uid://dkkj2wwiy56el"

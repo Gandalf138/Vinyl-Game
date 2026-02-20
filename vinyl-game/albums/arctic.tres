@@ -7,7 +7,6 @@
 script = ExtResource("2_1evlw")
 artist = "Arctic Mankey"
 album_name = "AM"
-runout = "DW342"
 nm_value = 25
 cover_texture = ExtResource("1_mnjtd")
 metadata/_custom_type_script = "uid://dkkj2wwiy56el"

@@ -7,7 +7,6 @@
 script = ExtResource("2_4g7c1")
 artist = "Punk Flood"
 album_name = "Gay Square"
-runout = "DSOTM"
 nm_value = 200
 cover_texture = ExtResource("1_yfseb")
 metadata/_custom_type_script = "uid://dkkj2wwiy56el"

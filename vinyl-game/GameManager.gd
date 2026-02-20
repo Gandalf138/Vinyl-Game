@@ -1,5 +1,8 @@
 extends Node
 
+var first_load
+var albums: Array[AlbumData] = []
+
 #Record Inspection Variables
 var current_record
 var top_of_stack

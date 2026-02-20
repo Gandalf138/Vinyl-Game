@@ -22,7 +22,6 @@ var characters = [
 	'0','1','2','3','4','5','6','7','8','9'
 ]
 var rng = RandomNumberGenerator.new()
-var albums: Array[AlbumData] = []
 var album_cover_paths = []
 var nmvalue = 0
 var dragging_record := false
@@ -32,7 +31,10 @@ var buy_value = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_albums()
+	if GameManager.first_load == null:
+		load_albums()
+		get_runouts()
+		
 	create_searchbar()
 	create_record_stack()
 	if GameManager.record_present:
@@ -56,9 +58,12 @@ func load_albums():
 		var file = dir.get_next()
 		while file != "":
 			if file.ends_with(".tres"):
-				albums.append(load("res://albums/" + file))
+				GameManager.albums.append(load("res://albums/" + file))
 			file = dir.get_next()
-	for record in albums:
+	GameManager.first_load = false
+		
+func get_runouts():
+	for record in GameManager.albums:
 		var n = 0
 		while n < 5:
 			record.runout += characters.pick_random()
@@ -101,12 +106,12 @@ func get_buy_stack_value() -> int:
 			
 func create_record_stack():
 	record_stack_sprite.texture = load("res://art/Assets/record_stack.png")
-	if GameManager.records_in_stack == [] and GameManager.buy_stack == []:
+	if GameManager.records_in_stack == [] and GameManager.buy_stack == [] and GameManager.current_record == null:
 		# How many records are in the stack
-		var n = rng.randi_range(1, 10)
+		var n = rng.randi_range(2, 10)
 		var r = 0
 		while r < n:
-			GameManager.records_in_stack.append(albums.pick_random())
+			GameManager.records_in_stack.append(GameManager.albums.pick_random())
 			r += 1
 	elif GameManager.records_in_stack == [] and GameManager.buy_stack != []:
 		record_stack_sprite.texture = null
@@ -161,24 +166,26 @@ func _on_record_input_event(_viewport: Node, event: InputEvent, _shape_idx: int)
 				get_tree().change_scene_to_file("res://RecordInspection.tscn")
 
 func _on_search_bar_text_submitted(new_text: String) -> void:
-	nmvalue = GameManager.current_record.nm_value
-	var vgvalue = int(floor(nmvalue * .7))
-	var fvalue = int(floor(nmvalue * .2))
-
-	if new_text == GameManager.current_record.runout and GameManager.record_present:
-		NMvalue_label.text = 'NM: $' + str(nmvalue)
-		NMvalue_label.add_theme_font_size_override("font_size", 24)
-		NMvalue_label.add_theme_color_override("font_color", Color.BLACK)
-		VGvalue_label.text = 'VG: $' + str(vgvalue)
-		VGvalue_label.add_theme_font_size_override("font_size", 24)
-		VGvalue_label.add_theme_color_override("font_color", Color.BLACK)
-		Fvalue_label.text = 'F: $' + str(fvalue)
-		Fvalue_label.add_theme_font_size_override("font_size", 24)
-		Fvalue_label.add_theme_color_override("font_color", Color.BLACK)
-	else:
-		NMvalue_label.text = ''
-		VGvalue_label.text = ''
-		Fvalue_label.text = ''
+	for record in GameManager.albums:
+		if new_text == record.runout:
+			nmvalue = record.nm_value
+			var vgvalue = int(floor(nmvalue * .7))
+			var fvalue = int(floor(nmvalue * .2))
+			
+			NMvalue_label.text = 'NM: $' + str(nmvalue)
+			NMvalue_label.add_theme_font_size_override("font_size", 24)
+			NMvalue_label.add_theme_color_override("font_color", Color.BLACK)
+			VGvalue_label.text = 'VG: $' + str(vgvalue)
+			VGvalue_label.add_theme_font_size_override("font_size", 24)
+			VGvalue_label.add_theme_color_override("font_color", Color.BLACK)
+			Fvalue_label.text = 'F: $' + str(fvalue)
+			Fvalue_label.add_theme_font_size_override("font_size", 24)
+			Fvalue_label.add_theme_color_override("font_color", Color.BLACK)
+			return
+		else:
+			NMvalue_label.text = ''
+			VGvalue_label.text = ''
+			Fvalue_label.text = ''
 
 func _on_vinyl_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:

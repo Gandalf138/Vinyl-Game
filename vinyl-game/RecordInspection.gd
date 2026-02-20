@@ -49,7 +49,6 @@ func create_back_button():
 	
 func create_record():
 	record_sleeve.texture = album.cover_texture
-	runout = album.runout
 	nmvalue = album.nm_value
 	GameManager.max_sticker_z = 0
 	for sticker_data in album.stickers:
