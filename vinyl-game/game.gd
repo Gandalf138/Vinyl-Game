@@ -34,9 +34,7 @@ func _ready() -> void:
 		create_record(GameManager.current_record)
 	if GameManager.disc_present:
 		create_disc()
-	
-	if GameManager.buy_stack != null:
-		buy_label.text = 'Stack Value: ' + str(get_buy_stack_value())
+	create_value_label()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
@@ -74,6 +72,15 @@ func create_record(album):
 func get_top_record():
 	if GameManager.records_in_stack != []:
 		GameManager.top_of_stack = GameManager.records_in_stack[0]
+	
+func create_value_label():
+	var crp
+	if GameManager.current_record == null or GameManager.current_record.price == null:
+		crp = 0
+	else:
+		crp = GameManager.current_record.price
+	var value = int(get_buy_stack_value()) + crp
+	buy_label.text = 'Stack Value: ' + str(value)
 	
 func get_buy_stack_value() -> int:
 	var total = 0
