@@ -16,6 +16,11 @@ extends Control
 @onready var disc_sprite = $Disc/Sprite2D
 @onready var buy_label = $BuyStackLabel
 
+var characters = [
+	'A','B','C','D','E','F','G','H','I','J','K','L','M',
+	'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+	'0','1','2','3','4','5','6','7','8','9'
+]
 var rng = RandomNumberGenerator.new()
 var albums: Array[AlbumData] = []
 var album_cover_paths = []
@@ -53,6 +58,11 @@ func load_albums():
 			if file.ends_with(".tres"):
 				albums.append(load("res://albums/" + file))
 			file = dir.get_next()
+	for record in albums:
+		var n = 0
+		while n < 5:
+			record.runout += characters.pick_random()
+			n+=1
 	
 func create_searchbar():
 	search_label.text = "Enter runout text: "
