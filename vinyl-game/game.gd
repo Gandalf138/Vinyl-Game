@@ -16,6 +16,7 @@ extends Control
 @onready var disc_sprite = $Disc/Sprite2D
 @onready var buy_label = $BuyStackLabel
 
+var rng = RandomNumberGenerator.new()
 var albums: Array[AlbumData] = []
 var album_cover_paths = []
 var nmvalue = 0
@@ -28,10 +29,7 @@ var buy_value = 0
 func _ready() -> void:
 	load_albums()
 	create_searchbar()
-	if GameManager.record_present == null:
-		get_top_record()
 	create_record_stack()
-	
 	if GameManager.record_present:
 		create_record(GameManager.current_record)
 	if GameManager.disc_present:
@@ -74,11 +72,9 @@ func create_record(album):
 	GameManager.record_present = true
 	
 func get_top_record():
-	GameManager.top_of_stack = albums.pick_random()
-	if GameManager.record_present:
-		if GameManager.top_of_stack.album_name == GameManager.current_record.album_name:
-			GameManager.top_of_stack = albums.pick_random()
-			
+	if GameManager.records_in_stack != []:
+		GameManager.top_of_stack = GameManager.records_in_stack[0]
+	
 func get_buy_stack_value() -> int:
 	var total = 0
 	for record in GameManager.buy_stack:
@@ -88,6 +84,19 @@ func get_buy_stack_value() -> int:
 			
 func create_record_stack():
 	record_stack_sprite.texture = load("res://art/Assets/record_stack.png")
+	if GameManager.records_in_stack == [] and GameManager.buy_stack == []:
+		# How many records are in the stack
+		var n = rng.randi_range(1, 10)
+		var r = 0
+		while r < n:
+			GameManager.records_in_stack.append(albums.pick_random())
+			r += 1
+	elif GameManager.records_in_stack == [] and GameManager.buy_stack != []:
+		record_stack_sprite.texture = null
+		top_record_sprite.texture = null
+		record_stack.get_node("CollisionShape2D").disabled = true
+		return
+	get_top_record()
 	top_record_sprite.texture = GameManager.top_of_stack.cover_texture
 	
 func create_disc():
@@ -118,9 +127,14 @@ func _on_record_stack_input_event(_viewport: Node, event: InputEvent, _shape_idx
 			sheen.texture = null
 			GameManager.record_present = false
 			create_record(GameManager.top_of_stack)
-			get_top_record()
-			create_record_stack()
 			buy_label.text = 'Stack Value: ' + str(get_buy_stack_value())
+			GameManager.records_in_stack.remove_at(0)
+			if GameManager.records_in_stack == []:
+				record_stack_sprite.texture = null
+				top_record_sprite.texture = null
+				record_stack.get_node("CollisionShape2D").disabled = true
+			else:
+				create_record_stack()
 			
 func _on_record_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:

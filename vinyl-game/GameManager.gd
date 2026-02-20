@@ -3,6 +3,7 @@ extends Node
 #Record Inspection Variables
 var current_record
 var top_of_stack
+var records_in_stack: Array[AlbumData] = []
 var record_present
 var disc_present
 
