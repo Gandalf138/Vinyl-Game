@@ -106,7 +106,7 @@ func get_buy_stack_value() -> int:
 			
 func create_record_stack():
 	record_stack_sprite.texture = load("res://art/Assets/record_stack.png")
-	if GameManager.records_in_stack == [] and GameManager.buy_stack == [] and GameManager.current_record == null:
+	if GameManager.records_in_stack == [] and GameManager.buy_stack == []:
 		# How many records are in the stack
 		var n = rng.randi_range(2, 10)
 		var r = 0
