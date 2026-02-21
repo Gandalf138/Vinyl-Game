@@ -1,0 +1,344 @@
+[gd_scene format=3 uid="uid://bvq3rd3y6mgp8"]
+
+[ext_resource type="Texture2D" uid="uid://i3u8yfn6577s" path="res://art/Assets/number_pad.png" id="1_t28j3"]
+[ext_resource type="Script" uid="uid://fbaw58qaej0b" path="res://NumberPad.gd" id="2_c0tlh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rfqqi"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fjgwx"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h3qi6"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awfoh"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xvbv5"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2iatb"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ugogd"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_obs2i"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xufd"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bvx1g"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6nmj4"]
+size = Vector2(100, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4o0yw"]
+size = Vector2(100, 80)
+
+[node name="NumberPad" type="Sprite2D" unique_id=1488277338]
+z_index = 5
+texture = ExtResource("1_t28j3")
+script = ExtResource("2_c0tlh")
+
+[node name="Pad0" type="Area2D" parent="." unique_id=517602248]
+position = Vector2(0, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad0" unique_id=1471471282]
+shape = SubResource("RectangleShape2D_rfqqi")
+
+[node name="Label" type="Label" parent="Pad0" unique_id=373649852]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad1" type="Area2D" parent="." unique_id=1337829657]
+position = Vector2(-131, 53)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad1" unique_id=1379352027]
+shape = SubResource("RectangleShape2D_fjgwx")
+
+[node name="Label" type="Label" parent="Pad1" unique_id=1497251836]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad2" type="Area2D" parent="." unique_id=1957834714]
+position = Vector2(0, 54)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad2" unique_id=2138567743]
+shape = SubResource("RectangleShape2D_h3qi6")
+
+[node name="Label" type="Label" parent="Pad2" unique_id=1897998829]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad3" type="Area2D" parent="." unique_id=186565049]
+position = Vector2(127, 54)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad3" unique_id=1083141091]
+shape = SubResource("RectangleShape2D_awfoh")
+
+[node name="Label" type="Label" parent="Pad3" unique_id=1717784772]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad4" type="Area2D" parent="." unique_id=595767498]
+position = Vector2(-128, 157)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad4" unique_id=1247157993]
+shape = SubResource("RectangleShape2D_xvbv5")
+
+[node name="Label" type="Label" parent="Pad4" unique_id=2100185955]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad5" type="Area2D" parent="." unique_id=2001624909]
+position = Vector2(0, 158)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad5" unique_id=1055338436]
+shape = SubResource("RectangleShape2D_2iatb")
+
+[node name="Label" type="Label" parent="Pad5" unique_id=1335157019]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad6" type="Area2D" parent="." unique_id=781794668]
+position = Vector2(129, 159)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad6" unique_id=693056747]
+shape = SubResource("RectangleShape2D_ugogd")
+
+[node name="Label" type="Label" parent="Pad6" unique_id=1192124804]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "6"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad7" type="Area2D" parent="." unique_id=2011154367]
+position = Vector2(-132, 261)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad7" unique_id=76435717]
+shape = SubResource("RectangleShape2D_obs2i")
+
+[node name="Label" type="Label" parent="Pad7" unique_id=2029668361]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "7"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Pad8" type="Area2D" parent="." unique_id=335768340]
+position = Vector2(0, 259)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pad8" unique_id=460305685]
+shape = SubResource("RectangleShape2D_3xufd")
+
+[node name="Label" type="Label" parent="Pad8" unique_id=1048191346]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -25.0
+offset_right = 20.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pad9" type="Area2D" parent="." unique_id=56285358]
+position = Vector2(130, 260)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pad9" unique_id=1022717978]
+shape = SubResource("RectangleShape2D_bvx1g")
+
+[node name="Label" type="Label" parent="pad9" unique_id=184321893]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "9"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PadPrint" type="Area2D" parent="." unique_id=1222548562]
+position = Vector2(125, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PadPrint" unique_id=338761994]
+shape = SubResource("RectangleShape2D_6nmj4")
+
+[node name="Label" type="Label" parent="PadPrint" unique_id=2115597443]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Print"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PadClear" type="Area2D" parent="." unique_id=473655247]
+position = Vector2(-132, -40)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PadClear" unique_id=400572807]
+shape = SubResource("RectangleShape2D_4o0yw")
+
+[node name="Label" type="Label" parent="PadClear" unique_id=1607771107]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -11.5
+offset_right = 20.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 36
+text = "Clear"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PadScreen" type="LineEdit" parent="." unique_id=948219354]
+offset_left = -185.0
+offset_top = -251.0
+offset_right = 181.0
+offset_bottom = -174.0
+theme_override_font_sizes/font_size = 36
+placeholder_text = "Enter Record Price"
+alignment = 2
+editable = false
+
+[connection signal="input_event" from="Pad0" to="." method="_on_pad_0_input_event"]
+[connection signal="input_event" from="Pad1" to="." method="_on_pad_1_input_event"]
+[connection signal="input_event" from="Pad2" to="." method="_on_pad_2_input_event"]
+[connection signal="input_event" from="Pad3" to="." method="_on_pad_3_input_event"]
+[connection signal="input_event" from="Pad4" to="." method="_on_pad_4_input_event"]
+[connection signal="input_event" from="Pad5" to="." method="_on_pad_5_input_event"]
+[connection signal="input_event" from="Pad6" to="." method="_on_pad_6_input_event"]
+[connection signal="input_event" from="Pad7" to="." method="_on_pad_7_input_event"]
+[connection signal="input_event" from="Pad8" to="." method="_on_pad_8_input_event"]
+[connection signal="input_event" from="pad9" to="." method="_on_pad_9_input_event"]
+[connection signal="input_event" from="PadPrint" to="." method="_on_pad_print_input_event"]
+[connection signal="input_event" from="PadClear" to="." method="_on_pad_clear_input_event"]

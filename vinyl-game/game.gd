@@ -6,44 +6,38 @@ extends Control
 @onready var NMvalue_label = $RightBottomContainer/ValuesContainer/NMValueLabel
 @onready var VGvalue_label = $RightBottomContainer/ValuesContainer/VGValueLabel
 @onready var Fvalue_label = $RightBottomContainer/ValuesContainer/FValueLabel
-@onready var record_stack = $RecordStack
-@onready var record_stack_sprite = $RecordStack/RecordStack
-@onready var top_record_sprite = $RecordStack/TopRecord
-@onready var record = $Record
+
 @onready var disc = $Disc
 @onready var sheen = $Sheen
 @onready var album_cover = $Record/Sprite2D
 @onready var disc_sprite = $Disc/Sprite2D
 @onready var buy_label = $BuyStackLabel
 
-var characters = [
-	'A','B','C','D','E','F','G','H','I','J','K','L','M',
-	'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
-	'0','1','2','3','4','5','6','7','8','9'
-]
+#Scenes
+@onready var record_stack = $RecordStack
+@onready var buy_stack = $BuyStack
+
 var rng = RandomNumberGenerator.new()
-var album_cover_paths = []
 var nmvalue = 0
 var dragging_record := false
 var drag_offset := 0.0
 var quality = ['NM', 'VG', 'F']
 var buy_value = 0
 
-# Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if GameManager.first_load == null:
 		load_albums()
 		get_runouts()
 		
+	record_stack.setup(GameManager.albums)
+	record_stack.record_taken.connect(_on_record_taken)
+	
+	buy_stack.record_clicked.connect(_on_record_clicked)
+	
 	create_searchbar()
-	create_record_stack()
-	if GameManager.record_present:
-		create_record(GameManager.current_record)
-	if GameManager.disc_present:
-		create_disc()
+		
 	create_value_label()
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if dragging_record:
 		var center = disc.global_position
@@ -61,13 +55,31 @@ func load_albums():
 				GameManager.albums.append(load("res://albums/" + file))
 			file = dir.get_next()
 	GameManager.first_load = false
-		
+	
 func get_runouts():
+	var characters = [
+	'A','B','C','D','E','F','G','H','I','J','K','L','M',
+	'N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+	'0','1','2','3','4','5','6','7','8','9'
+	]
 	for record in GameManager.albums:
 		var n = 0
 		while n < 5:
 			record.runout += characters.pick_random()
 			n+=1
+			
+func _on_record_taken(album):
+	GameManager.add_to_buy_stack(album)
+	buy_stack.update_display()
+	create_value_label()
+	
+func _on_record_clicked(record):
+	open_inspection(record)
+
+func open_inspection(record):
+	var inspection_scene = preload("res://RecordInspection.tscn").instantiate()
+	add_child(inspection_scene)
+	inspection_scene.load_record(record)
 	
 func create_searchbar():
 	search_label.text = "Enter runout text: "
@@ -75,52 +87,19 @@ func create_searchbar():
 	search_label.add_theme_color_override("font_color", Color.BLACK)
 	searchbar.add_theme_font_size_override("font_size", 30)
 	searchbar.custom_minimum_size = Vector2(200, 50)
-	
-func create_record(album):
-	if GameManager.record_present == false or GameManager.record_present == null:
-		GameManager.current_record = album.duplicate(true)
-	album_cover.texture = album.cover_texture
-	if GameManager.current_record.quality == null:
-		GameManager.current_record.quality = quality.pick_random()
-	GameManager.record_present = true
-	
-func get_top_record():
-	if GameManager.records_in_stack != []:
-		GameManager.top_of_stack = GameManager.records_in_stack[0]
-	
+
 func create_value_label():
-	var crp
-	if GameManager.current_record == null or GameManager.current_record.price == null:
-		crp = 0
-	else:
-		crp = GameManager.current_record.price
-	var value = int(get_buy_stack_value()) + crp
-	buy_label.text = 'Stack Value: ' + str(value)
+	var total = get_buy_stack_value()
+	buy_label.text = "Stack Value: $" + str(total)
 	
-func get_buy_stack_value() -> int:
-	var total = 0
-	for record in GameManager.buy_stack:
-		if record.price != null:
-			total += record.price
+func get_buy_stack_value() -> int: 
+	var total = 0 
+	for record in GameManager.buy_stack: 
+		if record.price != null: 
+			total += record.price 
 	return total
 			
-func create_record_stack():
-	record_stack_sprite.texture = load("res://art/Assets/record_stack.png")
-	if GameManager.records_in_stack == [] and GameManager.buy_stack == []:
-		# How many records are in the stack
-		var n = rng.randi_range(2, 10)
-		var r = 0
-		while r < n:
-			GameManager.records_in_stack.append(GameManager.albums.pick_random())
-			r += 1
-	elif GameManager.records_in_stack == [] and GameManager.buy_stack != []:
-		record_stack_sprite.texture = null
-		top_record_sprite.texture = null
-		record_stack.get_node("CollisionShape2D").disabled = true
-		return
-	get_top_record()
-	top_record_sprite.texture = GameManager.top_of_stack.cover_texture
-	
+			
 func create_disc():
 	if GameManager.current_record.disc_rotation != null:
 		disc.rotation = GameManager.current_record.disc_rotation
@@ -136,34 +115,6 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and not event.pressed:
 			dragging_record = false
-			
-func _on_record_stack_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if GameManager.record_present:
-				GameManager.buy_stack.append(GameManager.current_record)
-			disc_sprite.texture = null
-			if GameManager.disc_present == true:
-				disc.rotation = 0
-			GameManager.disc_present = false
-			sheen.texture = null
-			GameManager.record_present = false
-			create_record(GameManager.top_of_stack)
-			buy_label.text = 'Stack Value: ' + str(get_buy_stack_value())
-			GameManager.records_in_stack.remove_at(0)
-			if GameManager.records_in_stack == []:
-				record_stack_sprite.texture = null
-				top_record_sprite.texture = null
-				record_stack.get_node("CollisionShape2D").disabled = true
-			else:
-				create_record_stack()
-			
-func _on_record_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if GameManager.record_present == true:
-				GameManager.current_record.disc_rotation = disc.rotation
-				get_tree().change_scene_to_file("res://RecordInspection.tscn")
 
 func _on_search_bar_text_submitted(new_text: String) -> void:
 	for record in GameManager.albums:

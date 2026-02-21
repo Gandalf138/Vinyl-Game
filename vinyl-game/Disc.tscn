@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://j3s1s6vslmwf"]
+
+[ext_resource type="Script" uid="uid://dapm6nononvt1" path="res://Disc.gd" id="1_qg3uj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ntoxg"]
+radius = 450.0
+
+[node name="Disc" type="Node2D" unique_id=104866457]
+z_index = 1
+script = ExtResource("1_qg3uj")
+
+[node name="DiscSprite" type="Sprite2D" parent="." unique_id=695972419]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=505706952]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1193313131]
+shape = SubResource("CircleShape2D_ntoxg")
+
+[node name="RunoutPivot" type="Node2D" parent="." unique_id=1468669814]
+
+[node name="RunoutLabel" type="Label" parent="RunoutPivot" unique_id=1164397442]
+offset_right = 1.0
+offset_bottom = 23.0
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true

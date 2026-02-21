@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cslhqq5kjfn8p"]
+
+[ext_resource type="Script" uid="uid://d156vacie1ga0" path="res://RecordStack.gd" id="1_iy2rj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iy2rj"]
+size = Vector2(319, 333)
+
+[node name="RecordStack" type="Area2D" unique_id=795783947]
+script = ExtResource("1_iy2rj")
+
+[node name="StackSprite" type="Sprite2D" parent="." unique_id=1201751590]
+z_index = 1
+
+[node name="TopRecordSprite" type="Sprite2D" parent="." unique_id=1120487565]
+position = Vector2(-23.999998, -23.999992)
+scale = Vector2(0.33333334, 0.33333337)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=994914670]
+position = Vector2(-15.5, -8.5)
+shape = SubResource("RectangleShape2D_iy2rj")

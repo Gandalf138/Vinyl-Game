@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ygkxnk2dgu1y" path="res://game.gd" id="1_80nbo"]
 [ext_resource type="Texture2D" uid="uid://0hj1awswjbag" path="res://art/Backgrounds/Counter.png" id="2_e2o6t"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_feb5d"]
-size = Vector2(300, 300)
+[ext_resource type="PackedScene" uid="uid://cslhqq5kjfn8p" path="res://RecordStack.tscn" id="3_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dfqx8tates7br" path="res://BuyStack.tscn" id="4_fc0e3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2o6t"]
 radius = 150.0
@@ -76,27 +75,11 @@ layout_mode = 2
 [node name="FValueLabel" type="Label" parent="RightBottomContainer/ValuesContainer" unique_id=454926412]
 layout_mode = 2
 
-[node name="RecordStack" type="Area2D" parent="." unique_id=1851714835]
-position = Vector2(210, 775)
+[node name="RecordStack" parent="." unique_id=795783947 instance=ExtResource("3_feb5d")]
+position = Vector2(221, 774)
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="RecordStack" unique_id=1458458581]
-polygon = PackedVector2Array(-162, -158, -163, 138, -143, 173, 156, 173, 156, -125, 137, -159)
-
-[node name="TopRecord" type="Sprite2D" parent="RecordStack" unique_id=1702368651]
-position = Vector2(-24, -22)
-scale = Vector2(0.333, 0.333)
-
-[node name="RecordStack" type="Sprite2D" parent="RecordStack" unique_id=1433075014]
-
-[node name="Record" type="Area2D" parent="." unique_id=630962859]
-z_index = 2
+[node name="BuyStack" parent="." unique_id=1983435460 instance=ExtResource("4_fc0e3")]
 position = Vector2(750, 750)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Record" unique_id=282876567]
-shape = SubResource("RectangleShape2D_feb5d")
-
-[node name="Sprite2D" type="Sprite2D" parent="Record" unique_id=1147682656]
-scale = Vector2(0.333, 0.333)
 
 [node name="Disc" type="Area2D" parent="." unique_id=1204424342]
 z_index = 1
@@ -122,6 +105,4 @@ offset_bottom = 581.0
 theme_override_font_sizes/font_size = 36
 
 [connection signal="text_submitted" from="RightCenterContainer/RightCounterContainer/SearchBar" to="." method="_on_search_bar_text_submitted"]
-[connection signal="input_event" from="RecordStack" to="." method="_on_record_stack_input_event"]
-[connection signal="input_event" from="Record" to="." method="_on_record_input_event"]
 [connection signal="input_event" from="Disc" to="." method="_on_vinyl_input_event"]

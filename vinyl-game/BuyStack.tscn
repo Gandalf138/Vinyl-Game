@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dfqx8tates7br"]
+
+[ext_resource type="Script" uid="uid://ccw477sste5m0" path="res://BuyStack.gd" id="1_ishd5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ishd5"]
+size = Vector2(300, 300)
+
+[node name="BuyStack" type="Node2D" unique_id=1448247225]
+script = ExtResource("1_ishd5")
+
+[node name="RecordDisplay" type="Sprite2D" parent="." unique_id=1553800276]
+scale = Vector2(0.333, 0.333)
+
+[node name="ClickArea" type="Area2D" parent="." unique_id=1595238039]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea" unique_id=1256966038]
+shape = SubResource("RectangleShape2D_ishd5")
