@@ -66,7 +66,11 @@ func _on_record_taken(album):
 	create_value_label()
 	
 func _on_record_clicked(record):
-	open_inspection(record)
+	for i in get_children():
+		if has_node("RecordInspection"):
+			return
+		else:
+			open_inspection(record)
 
 func open_inspection(record):
 	var inspection_scene = preload("res://scenes/RecordInspection.tscn").instantiate()
