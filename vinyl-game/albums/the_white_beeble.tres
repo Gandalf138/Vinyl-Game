@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://cfuhfrst1ulo3"]
 
 [ext_resource type="Texture2D" uid="uid://dlnv40tc8ot1w" path="res://art/album covers/beeble.png" id="1_q3bsj"]
-[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_e8hut"]
+[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://scenes/album_data.gd" id="2_e8hut"]
 
 [resource]
 script = ExtResource("2_e8hut")

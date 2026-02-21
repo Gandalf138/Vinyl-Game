@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bvq3rd3y6mgp8"]
 
 [ext_resource type="Texture2D" uid="uid://i3u8yfn6577s" path="res://art/Assets/number_pad.png" id="1_t28j3"]
-[ext_resource type="Script" uid="uid://fbaw58qaej0b" path="res://NumberPad.gd" id="2_c0tlh"]
+[ext_resource type="Script" uid="uid://fbaw58qaej0b" path="res://scenes/NumberPad.gd" id="2_c0tlh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rfqqi"]
 size = Vector2(100, 80)

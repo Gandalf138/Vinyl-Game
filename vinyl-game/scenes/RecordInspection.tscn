@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://du4u8ltc00vgh"]
 
-[ext_resource type="Script" uid="uid://dq5a1jru0x5ly" path="res://RecordInspection.gd" id="1_ntoxg"]
+[ext_resource type="Script" uid="uid://dq5a1jru0x5ly" path="res://scenes/RecordInspection.gd" id="1_ntoxg"]
 [ext_resource type="Texture2D" uid="uid://uod61hx02oas" path="res://art/Backgrounds/Record_Inspection.png" id="2_5p5pq"]
-[ext_resource type="PackedScene" uid="uid://bvq3rd3y6mgp8" path="res://NumberPad.tscn" id="3_5p5pq"]
-[ext_resource type="PackedScene" uid="uid://j3s1s6vslmwf" path="res://Disc.tscn" id="3_fjgwx"]
+[ext_resource type="PackedScene" uid="uid://bvq3rd3y6mgp8" path="res://scenes/NumberPad.tscn" id="3_5p5pq"]
+[ext_resource type="PackedScene" uid="uid://j3s1s6vslmwf" path="res://scenes/Disc.tscn" id="3_fjgwx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ntoxg"]
 size = Vector2(900, 900)
@@ -26,8 +26,12 @@ layer = -1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=1981130155]
 z_index = -1
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
 texture = ExtResource("2_5p5pq")
 
 [node name="BackButton" type="Button" parent="." unique_id=1686204046]
@@ -55,10 +59,6 @@ position = Vector2(375, -375)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RecordSleeve/StickerZone" unique_id=1321857663]
 shape = SubResource("RectangleShape2D_5p5pq")
-
-[node name="Sheen" type="Sprite2D" parent="." unique_id=1718360745]
-z_index = 4
-position = Vector2(1000, 540)
 
 [node name="Sticker" type="Area2D" parent="." unique_id=372303162]
 position = Vector2(1540, 150)
@@ -93,6 +93,5 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(1682, 652)
 
 [connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]
-[connection signal="input_event" from="Disc" to="." method="_on_disc_input_event"]
 [connection signal="input_event" from="RecordSleeve" to="." method="_on_record_sleeve_input_event"]
 [connection signal="input_event" from="Sticker" to="." method="_on_sticker_input_event"]

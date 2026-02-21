@@ -2,7 +2,6 @@ extends Control
 
 @onready var record_sleeve = $RecordSleeve/Sprite2D
 @onready var back_button = $BackButton
-@onready var sheen = $Sheen
 @onready var sticker = $Sticker
 @onready var sticker_sprite = $Sticker/Sprite2D
 @onready var price = $Sticker/Label
@@ -32,10 +31,6 @@ func _enter_tree():
 
 func _on_print_pressed(value):
 	create_sticker(value)
-
-func create_back_button():
-	back_button.text = "Return to counter"
-	back_button.add_theme_font_size_override("font_size", 36)
 	
 func load_record(record):
 	album = record
@@ -46,30 +41,15 @@ func setup_record():
 	record_sleeve.texture = album.cover_texture
 	
 func setup_disc():
-	print(album.quality)
 	disc_scene.set_texture(get_disc_texture(album.quality))
 	disc_scene.set_runout(album.runout)
+	if album.quality == 'NM':
+		disc_scene.set_sheen(load('res://art/Assets/discs/sheen.png'))
 	if album.disc_rotation != null:	
 		disc_scene.rotation = album.disc_rotation
 	else:
 		disc_scene.rotation = 0.0
 
-'''
-func create_record():
-	record_sleeve.texture = album.cover_texture
-	nmvalue = album.nm_value
-	GameManager.max_sticker_z = 0
-	for sticker_data in album.stickers:
-		var sticker_copy = sticker.duplicate(true)
-		sticker_copy.get_node("CollisionShape2D").disabled = true
-		sticker_copy.position = sticker_data.position
-		sticker_copy.get_node("Label").text = sticker_data.text
-		sticker_copy.get_node("Sprite2D").texture = load("res://art/Assets/sticker.png")
-		sticker_copy.z_index = GameManager.max_sticker_z
-		print('sticker copy z index: ' + str(sticker_copy.z_index))
-		record_sleeve.add_child(sticker_copy)
-		GameManager.max_sticker_z+=1
-'''
 func get_disc_texture(quality):
 	match quality:
 		"NM":
@@ -78,11 +58,19 @@ func get_disc_texture(quality):
 			return load("res://art/Assets/discs/disc.png")
 		"F":
 			return load("res://art/Assets/discs/dusty_disc.png")
+			
+func create_back_button():
+	back_button.text = "Return to counter"
+	back_button.add_theme_font_size_override("font_size", 36)
+	
+func _on_back_button_pressed() -> void:
+	album.disc_rotation = disc_scene.rotation
+	queue_free()
+	
+	
+	
+	
 
-func _on_record_sleeve_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			pass
 			
 func _on_sticker_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton:
@@ -131,10 +119,6 @@ func get_top_edge(area: Area2D) -> float:
 	var shape = area.get_node("CollisionShape2D").shape
 	var half_width = shape.size.y / 2.0
 	return area.global_position.y - half_width
-
-func _on_back_button_pressed() -> void:
-	album.disc_rotation = disc_scene.rotation
-	queue_free()
 	
 				
 func create_sticker(value):

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://j3s1s6vslmwf"]
 
-[ext_resource type="Script" uid="uid://dapm6nononvt1" path="res://Disc.gd" id="1_qg3uj"]
+[ext_resource type="Script" uid="uid://dapm6nononvt1" path="res://scenes/Disc.gd" id="1_qg3uj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ntoxg"]
 radius = 450.0
@@ -12,6 +12,8 @@ script = ExtResource("1_qg3uj")
 [node name="DiscSprite" type="Sprite2D" parent="." unique_id=695972419]
 
 [node name="Area2D" type="Area2D" parent="." unique_id=505706952]
+z_index = 1
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1193313131]
 shape = SubResource("CircleShape2D_ntoxg")
@@ -19,8 +21,22 @@ shape = SubResource("CircleShape2D_ntoxg")
 [node name="RunoutPivot" type="Node2D" parent="." unique_id=1468669814]
 
 [node name="RunoutLabel" type="Label" parent="RunoutPivot" unique_id=1164397442]
-offset_right = 1.0
-offset_bottom = 23.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -11.5
+offset_right = 0.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Sheen" type="Sprite2D" parent="." unique_id=2000145324]
+z_index = 2
+
+[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]

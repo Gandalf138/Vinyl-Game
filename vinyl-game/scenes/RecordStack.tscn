@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cslhqq5kjfn8p"]
 
-[ext_resource type="Script" uid="uid://d156vacie1ga0" path="res://RecordStack.gd" id="1_iy2rj"]
+[ext_resource type="Script" uid="uid://d156vacie1ga0" path="res://scenes/RecordStack.gd" id="1_iy2rj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iy2rj"]
 size = Vector2(319, 333)

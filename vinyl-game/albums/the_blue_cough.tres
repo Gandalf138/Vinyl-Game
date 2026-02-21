@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AlbumData" format=3 uid="uid://37uc4fj0b6fj"]
 
 [ext_resource type="Texture2D" uid="uid://0464f7nev0ow" path="res://art/album covers/cough.png" id="1_l47dg"]
-[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://album_data.gd" id="2_2jtsk"]
+[ext_resource type="Script" uid="uid://dkkj2wwiy56el" path="res://scenes/album_data.gd" id="2_2jtsk"]
 
 [resource]
 script = ExtResource("2_2jtsk")
